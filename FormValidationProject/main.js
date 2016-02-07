@@ -1,4 +1,4 @@
-var app = angular.module('minmax', ['angular-ladda']);
+var app = angular.module('minmax', ['angular-ladda', 'jcs-autoValidate']);
 
 app.controller('MinMaxCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.formModel = {};

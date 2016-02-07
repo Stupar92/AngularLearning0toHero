@@ -1,0 +1,90 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="minmax">
+<head >
+	<title >Data Binding</title >
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/ladda/dist/ladda-themeless.min.css">
+	<link href="main.css"
+	      rel="stylesheet" >
+</head >
+
+<body ng-controller="MinMaxCtrl">
+
+    <nav class="navbar navbar-inverse navbar-top" >
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Controllers</a>
+            </div>
+        </div>
+    </nav>
+    
+<div class="container main-content">
+    <form ng-submit="onSubmit(theForm.$valid)" novalidate="novalidate" name="theForm">
+        <div class="form-group">
+            <label for="name" class="control-label">Name</label>
+            <input type="text" class="form-control" id="name" ng-model="formModel.name"/>
+        </div>
+        
+        <div class="form-group" ng-class="
+                            {
+                                'has-error': !theForm.email.$valid && (!theForm.$pristine || theForm.$submitted),
+                                'has-success': theForm.email.$valid && (!theForm.$pristine || theForm.$submitted)
+                            }">
+            <label for="email" class="control-label">Email</label>
+            <input type="email" 
+                   class="form-control" 
+                   id="email" 
+                   ng-model="formModel.email" 
+                   required="required"
+                   name="email"/>
+            <p class="help-block" ng-show="theForm.email.$error.required && (!theForm.$pristine || theForm.$submitted)">
+                Email is required.
+            </p>
+            <p class="help-block" ng-show="theForm.email.$error.email && (!theForm.$pristine || theForm.$submitted)">
+                Please enter a valid email.
+            </p>
+        </div>
+        
+        <div class="form-group">
+            <label for="username" class="control-label">Username</label>
+            <input type="text" class="form-control" id="username" ng-model="formModel.username"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="age" class="control-label">Age</label>
+            <input type="number" class="form-control" id="age" ng-model="formModel.age"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="gender" class="control-label">Gender</label>
+            <select name="gender" id="gender" class="form-control" ng-model="formModel.gender">
+                <option value="">Please choose..</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="password" class="control-label">Password</label>
+            <input type="password" class="form-control" id="password" ng-model="formModel.password"/>
+        </div>
+        
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" ladda="submitting" data-style="expand-right" >
+                <span ng-show="submitting">Registering...</span>
+                <span ng-show="!submitting">Register</span>
+            </button>
+        </div>
+        
+    </form>
+    
+    <pre>{{theForm | json}}</pre>
+</div >
+
+<script src="//code.angularjs.org/1.5.0/angular.min.js"></script>
+<script src="bower_components/ladda/dist/spin.min.js"></script>
+<script src="bower_components/ladda/dist/ladda.min.js"></script>
+<script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
+<script src="main.js"></script>
+</body >
+</html >

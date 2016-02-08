@@ -1,10 +1,15 @@
 var app = angular.module('codecraft', []);
 
-app.controller('PersonsController', ['$scope', function($scope) {
+app.service('ContactService', function() {
+    
+})
+
+
+
+app.controller('PersonListController', ['$scope', function($scope) {
     
     $scope.search = "";
     $scope.order = "email";
-    $scope.selectedIndex = null;
     $scope.selectedPerson = null;
     
     $scope.sentitiveSearch = function (person) {
@@ -16,12 +21,16 @@ app.controller('PersonsController', ['$scope', function($scope) {
     }
     
     $scope.selectPerson = function(person, index) {
-        $scope.selectedIndex = index;
         $scope.selectedPerson = person;
     }
     
     // This is the sample data for this lesson
-    $scope.persons = [
+   
+}]);
+
+app.controller('PersonDetailController', ['$scope', function($scope) {
+    
+    var persons = [
 		{
 			"name": "Gregory Huffman",
 			"email": "Praesent@pedenec.net",
@@ -923,5 +932,12 @@ app.controller('PersonsController', ['$scope', function($scope) {
 			"country": "Taiwan"
 		}
 	]
+    
+    return {
+        'addPerson': function(person) {
+            this.persons.push(person);
+        }
+        'selectedPerson': null,
+        'persons': persons
+    }
 }]);
-

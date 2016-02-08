@@ -1,7 +1,7 @@
 <!DOCTYPE html >
 <html lang="en" ng-app="codecraft" >
 <head >
-	<title >Lists Of Things</title >
+	<title >Contacts</title >
     
 <script src="//code.angularjs.org/1.5.0/angular.min.js"></script>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -20,7 +20,7 @@
 	</div >
 </nav >
 
-<div class="main-content" ng-controller="PersonsController" ng-cloak>
+<div class="main-content" ng-cloak>
     
     <div class="row">
         <div class="col-md-12">
@@ -47,40 +47,45 @@
     
     <div class="row">
         <div class="col-md-8">
-             <table class="table table-bordered" >
-                <tr>
-                    <th>#</th>
-                    <th>
-                        Name
-                        <span ng-click="order = 'name'" class="glyphicon glyphicon-menu-up"></span>
-                        <span ng-click="order = '-name'" class="glyphicon glyphicon-menu-down"></span>
-                    </th>
-                    <th>
-                        Email
-                         <span ng-click="order = 'email'" class="glyphicon glyphicon-menu-up"></span>
-                         <span ng-click="order = '-email'" class="glyphicon glyphicon-menu-down"></span>
-                    </th>
-                    <th>Birthday</th>
-                </tr>
+            <div class="row">
+                <div class="col-md-12"  ng-controller="PersonListController">
+                    <table class="table table-bordered" >
+                        <tr>
+                            <th>#</th>
+                            <th>
+                                Name
+                                <span ng-click="order = 'name'" class="glyphicon glyphicon-menu-up"></span>
+                                <span ng-click="order = '-name'" class="glyphicon glyphicon-menu-down"></span>
+                            </th>
+                            <th>
+                                Email
+                                 <span ng-click="order = 'email'" class="glyphicon glyphicon-menu-up"></span>
+                                 <span ng-click="order = '-email'" class="glyphicon glyphicon-menu-down"></span>
+                            </th>
+                            <th>Birthday</th>
+                        </tr>
 
-                <tr ng-repeat="person in persons | filter: sentitiveSearch | orderBy: order"
-                    ng-style = "{
-                                'background-color': $index == selectedIndex ? 'lightgray' : ''
-                                }"
-                    ng-mouseover="selectPerson(person, $index)">
-                    <td> {{ $index }}</td>
-                    <td>{{ person.name }}</td>
-                    <td>{{ person.email }}</td>
-                    <td>{{ person.birthdate | date: "MMM d, y"}}</td>
-                </tr>
-                 
-                 <tr ng-show="(persons | filter: sentitiveSearch).length == 0">
-                    <td colspan="4">No results...</td>
-                 </tr>
-                 
-            </table>
+                        <tr ng-repeat="person in persons | filter: sentitiveSearch | orderBy: order"
+                            ng-style = "{
+                                        'background-color': person.email == selectedPerson.email ? 'lightgray' : ''
+                                        }"
+                            ng-mouseover="selectPerson(person, $index)">
+                            <td> {{ $index }}</td>
+                            <td>{{ person.name }}</td>
+                            <td>{{ person.email }}</td>
+                            <td>{{ person.birthdate | date: "MMM d, y"}}</td>
+                        </tr>
+
+                         <tr ng-show="(persons | filter: sentitiveSearch).length == 0">
+                            <td colspan="4">No results...</td>
+                         </tr>
+
+                    </table>
+                </div>
+            </div>         
         </div>
-        <div class="col-md-4">
+        
+        <div class="col-md-4" ng-controller="PersonDetailController">
             <div class="panel panel-default">
                 <div class="panel-heading">Details</div>
                 <div class="panel-body">

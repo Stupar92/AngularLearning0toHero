@@ -2,9 +2,22 @@ var app = angular.module('codecraft', []);
 
 app.controller('PersonsController', ['$scope', function($scope) {
     
+    $scope.search = "";
+    $scope.order = "email";
     $scope.selectedIndex = null;
-    $scope.selectPerson = function(index) {
+    $scope.selectedPerson = null;
+    
+    $scope.sentitiveSearch = function (person) {
+        if ($scope.search) {
+            return person.name.indexOf($scope.search) == 0 ||
+                person.email.indexOf($scope.search) == 0;
+        }   
+        return true;
+    }
+    
+    $scope.selectPerson = function(person, index) {
         $scope.selectedIndex = index;
+        $scope.selectedPerson = person;
     }
     
     // This is the sample data for this lesson

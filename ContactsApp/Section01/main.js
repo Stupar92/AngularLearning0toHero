@@ -1,5 +1,14 @@
-// This is the sample data for this lesson
-var sample = [
+var app = angular.module('codecraft', []);
+
+app.controller('PersonsController', ['$scope', function($scope) {
+    
+    $scope.selectedIndex = null;
+    $scope.selectPerson = function(index) {
+        $scope.selectedIndex = index;
+    }
+    
+    // This is the sample data for this lesson
+    $scope.persons = [
 		{
 			"name": "Gregory Huffman",
 			"email": "Praesent@pedenec.net",
@@ -901,3 +910,5 @@ var sample = [
 			"country": "Taiwan"
 		}
 	]
+}]);
+
